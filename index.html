@@ -31,12 +31,10 @@
             --border: rgba(0, 0, 0, 0.08);
         }
 
-        /* --- GLOBAL SMOOTH TRANSITION --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Uniform timing for all elements to prevent color mismatch */
             transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 border-color 0.5s ease,
@@ -48,13 +46,15 @@
             color: var(--text-dim);
             font-family: 'Plus Jakarta Sans', sans-serif;
             line-height: 1.7;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 30px;
-
+            padding: 0 20px;
+            /* Reduced padding for mobile */
         }
 
         h1,
@@ -64,10 +64,12 @@
             color: var(--lavender);
         }
 
+        /* --- NAV --- */
         nav {
-            padding: 25px 0;
+            padding: 20px 0;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+            /* Align toggle to right */
             align-items: center;
             border-bottom: 1px solid var(--border);
             position: sticky;
@@ -78,218 +80,195 @@
 
         .theme-toggle {
             cursor: pointer;
-            padding: 10px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
             border: 1px solid var(--lavender);
             background: transparent;
             color: var(--lavender);
             font-weight: 600;
-            margin-left: 1000px;
+            font-size: 0.8rem;
         }
 
+        /* --- HERO --- */
         .hero {
-            padding: 140px 100px;
+            padding: 80px 20px;
+            /* Scaled down from 140px */
             text-align: center;
-            margin-top: 50px;
-            margin-bottom: 100px;
+            margin-bottom: 40px;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            letter-spacing: -2px;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            letter-spacing: -1px;
             margin-bottom: 15px;
+            line-height: 1.1;
         }
 
         .hero .role {
             color: var(--text-main);
             font-weight: 600;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            margin-bottom: 35px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
             display: block;
         }
 
         .value-prop {
             max-width: 850px;
             margin: 0 auto;
-            font-size: 1.4rem;
+            font-size: 1.1rem;
+            /* Better for mobile readability */
             border-left: 4px solid var(--accent);
-            padding: 10px 30px;
+            padding: 10px 20px;
             text-align: left;
             color: var(--text-main);
         }
 
+        /* --- BENTO & GRIDS --- */
         .section-margin {
-            margin: 100px 0;
+            margin: 60px 0;
+            /* Scaled down for mobile */
         }
 
         .bento-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr;
-            gap: 30px;
-            margin: 60px 0;
+            gap: 20px;
+            margin: 40px 0;
         }
 
         .bento-item {
             background: var(--card-bg);
-            padding: 50px;
-            border-radius: 35px;
+            padding: 30px;
+            /* Scaled down from 50px */
+            border-radius: 25px;
             border: 1px solid var(--border);
         }
 
         .skills-wrap {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 50px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .skill-box {
             background: var(--glass);
-            padding: 35px;
-            border-radius: 25px;
+            padding: 25px;
+            border-radius: 20px;
             border: 1px solid var(--border);
         }
 
-        .skill-box i {
-            color: var(--accent);
-            font-size: 1.6rem;
-            margin-right: 15px;
-        }
-
+        /* --- TIMELINE --- */
         .timeline-item {
-            margin-bottom: 50px;
-            padding-left: 40px;
+            margin-bottom: 40px;
+            padding-left: 30px;
             border-left: 3px solid var(--accent);
             position: relative;
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -11px;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
+        /* --- CARDS --- */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 35px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .detailed-card {
             background: var(--card-bg);
-            border-radius: 35px;
+            border-radius: 25px;
             border: 1px solid var(--border);
-            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        .detailed-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-10px);
-        }
-
         .card-img {
             width: 100%;
-            height: 240px;
+            height: 200px;
             object-fit: cover;
-            border-bottom: 1px solid var(--border);
         }
 
         .card-body {
-            padding: 35px;
+            padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        .tag-accent {
-            color: var(--accent);
-            font-weight: 800;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        .info-block {
-            padding: 20px;
-            background: var(--glass);
-            border-radius: 20px;
-            font-size: 0.95rem;
-        }
-
-        /* --- FIXED BUTTON TRANSITION --- */
-        .btn-eye {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--accent);
-            color: white !important;
-            /* Force text color */
-            padding: 14px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-top: auto;
-            width: fit-content;
-            border: none;
-        }
-
-        .btn-eye i {
-            color: white !important;
-        }
-
-        .btn-eye:hover {
-            background: var(--lavender);
-            color: var(--bg) !important;
-            /* Switch text color with background */
-        }
-
-        .btn-eye:hover i {
-            color: var(--bg) !important;
-            /* Switch icon color with background */
-        }
-
+        /* --- CONTACT --- */
         .contact-box {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
+            gap: 40px;
             background: var(--card-bg);
-            padding: 70px;
-            border-radius: 45px;
+            padding: 40px 25px;
+            border-radius: 30px;
             border: 1px solid var(--border);
         }
 
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
-        .contact-form input,
-        .contact-form select,
-        .contact-form textarea {
-            padding: 18px;
-            border-radius: 15px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            color: #fff;
+        .btn-eye {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--accent);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            width: fit-content;
+            border: none;
         }
 
+        /* --- MEDIA QUERIES (The Magic) --- */
         @media (max-width: 900px) {
 
             .bento-grid,
-            .contact-box,
-            .card-grid {
+            .contact-box {
                 grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 60px 10px;
+            }
+
+            .contact-left {
+                text-align: center;
+            }
+
+            .contact-left div {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .value-prop {
+                font-size: 1rem;
+            }
+
+            .bento-item {
+                padding: 25px;
+            }
+
+            .skill-box {
+                padding: 20px;
             }
         }
     </style>
