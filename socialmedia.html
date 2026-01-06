@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Creative Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #000000;
+            --bg-nav: rgba(0, 0, 0, 0.9);
+            --title-color: #ffffff;
+            --text-sub: #94a3b8;
+            --card-bg: #111111;
+            --accent: #ffffff;
+            --btn-bg: #1a1a1a;
+            --btn-text: #ffffff;
+            --sync-speed: 0.4s ease-in-out;
+            --nav-height: 80px;
+        }
+
+        [data-theme="light"] {
+            --bg-body: #FFFAF0;
+            --bg-nav: rgba(255, 250, 240, 0.9);
+            --title-color: #000000;
+            --text-sub: #666;
+            --card-bg: #FDF5E6;
+            --accent: #000000;
+            --btn-bg: #e5e5e5;
+            --btn-text: #000000;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color var(--sync-speed), color var(--sync-speed), border-color var(--sync-speed);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--title-color);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            /* Removes blue highlight on mobile tap */
+        }
+
+        /* --- Theme Switcher Responsive --- */
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 10px;
+            right: 15px;
+            height: auto;
+            display: flex;
+            align-items: center;
+            z-index: 2001;
+        }
+
+        #theme-toggle {
+            cursor: pointer;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 1px solid var(--text-sub);
+            background: var(--bg-nav);
+            color: var(--title-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- Header Responsive --- */
+        header {
+            padding: 80px 20px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            margin-top: 15px;
+        }
+
+        /* --- Filter Nav Responsive --- */
+        .filter-nav {
+            position: sticky;
+            top: 0;
+            min-height: 70px;
+            background: var(--bg-nav);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            /* Allows buttons to wrap on small screens */
+            padding: 10px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+        }
+
+        .btn {
+            background: var(--btn-bg);
+            border: none;
+            padding: 10px 20px;
+            margin: 4px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--btn-text);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .btn.active {
+            background: var(--accent);
+            color: var(--bg-body);
+        }
+
+        /* --- Grid System (Core Responsiveness) --- */
+        .portfolio-grid {
+            max-width: 1440px;
+            margin: 20px auto;
+            display: grid;
+            /* Small mobile: 1 column | Large mobile: 2 columns | Tablet/Desktop: Auto-fill */
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--card-bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        .card.has-link img {
+            cursor: pointer;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .zoom-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            opacity: 1;
+            /* Keeping it visible for mobile users who can't hover */
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        /* --- Modal Responsive --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.98);
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .modal-content {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* --- Media Queries for Fine-Tuning --- */
+
+        /* Tablets (Landscape & Portrait) */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        /* Mobile Phones */
+        @media (max-width: 600px) {
+            header {
+                padding: 60px 15px 30px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columns on mobile */
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.65rem;
+            }
+
+            .zoom-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+                top: 8px;
+                right: 8px;
+            }
+
+            .card {
+                border-radius: 10px;
+            }
+        }
+
+        /* Tiny screens (Older phones) */
+        @media (max-width: 380px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                /* 1 column on very small screens */
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <div class="theme-switch-wrapper">
+        <button id="theme-toggle"><span>☀️</span> LIGHT</button>
+    </div>
+
+    <header>
+        <h1>Creative Showcase</h1>
+        <p>A Curated Gallery of Digital Designs</p>
+    </header>
+
+    <nav class="filter-nav" id="btnContainer">
+        <button class="btn active" onclick="filterObjects('all', event)">All Work</button>
+        <button class="btn" onclick="filterObjects('text', event)">Text-Based</button>
+        <button class="btn" onclick="filterObjects('ai', event)">AI Models</button>
+        <button class="btn" onclick="filterObjects('product', event)">Product Design</button>
+        <button class="btn" onclick="filterObjects('collage', event)">Collage Based</button>
+    </nav>
+
+    <main class="portfolio-grid" id="portfolio"></main>
+
+    <div id="imageModal" class="modal" onclick="this.style.display='none'">
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        const linkMap = {
+            'text1.jpg': 'https://www.instagram.com/bmcs_llc/p/DKGzEw_oqg1/',
+            'text2.jpg': 'https://www.instagram.com/bmcs_llc/p/DKylJePoe0Y/',
+            'text3.jpg': 'https://www.instagram.com/bmcs_llc/p/DKOrwr8o0Hk/',
+            'text5.jpg': 'https://www.instagram.com/bmcs_llc/p/DJ9gpLtI67D/',
+            'text7.jpg': 'https://www.instagram.com/bmcs_llc/p/DKCG2MQIitD/',
+            'text17.jpg': 'https://www.instagram.com/bmcs_llc/p/DK4oFLpI9DZ/',
+            'text18.jpg': 'https://www.instagram.com/bmcs_llc/p/DK63vnZoSvT/',
+            'text31.jpg': 'https://www.instagram.com/panache_floorings/p/DJrYdvPKk97/',
+            'text32.jpg': 'https://www.instagram.com/panache_floorings/p/DJs3sEgRONH/',
+            'text34.jpg': 'https://www.instagram.com/panache_floorings/p/DJyBRRKtBix/',
+            'text35.jpg': 'https://www.instagram.com/panache_floorings/p/DJ0mEe9hn0E/',
+            'text36.jpg': 'https://www.instagram.com/panache_floorings/p/DJ3K2WCPueR/',
+            'text37.jpg': 'https://www.instagram.com/panache_floorings/p/DJ5vqgJqq1r/',
+            'text38.jpg': 'https://www.instagram.com/panache_floorings/p/DJ8Ub80Ju4e/',
+            'text40.jpg': 'https://www.instagram.com/panache_floorings/p/DKBeDXnSR1y/',
+            'text41.jpg': 'https://www.instagram.com/panache_floorings/p/DKEC1t6vrJ6/',
+            'text42.jpg': 'https://www.instagram.com/panache_floorings/p/DKGnmqiPxyT/',
+            'text43.jpg': 'https://www.instagram.com/panache_floorings/p/DKJMbBKsiSD/',
+
+            // AI MODELS (Example first 3)
+            'ai1.jpg': 'https://example.com/ai1',
+            'ai2.jpg': 'https://example.com/ai2',
+            'ai3.jpg': 'https://example.com/ai3',
+
+            // PRODUCT DESIGN (Example first 3)
+            'product1.jpg': 'https://example.com/product1',
+            'product2.jpg': 'https://example.com/product2',
+            'product3.jpg': 'https://example.com/product3',
+
+            // COLLAGE BASED (Example first 3)
+            'collage1.jpg': 'https://example.com/collage1',
+            'collage2.jpg': 'https://example.com/collage2',
+            'collage3.jpg': 'https://example.com/collage3',
+        };
+
+        const categories = { text: 50, ai: 40, product: 55, collage: 20 };
+        const grid = document.getElementById('portfolio');
+
+        Object.keys(categories).forEach(cat => {
+            for (let i = 1; i <= categories[cat]; i++) {
+                const fileName = `${cat}${i}.jpg`;
+                const customUrl = linkMap[fileName];
+
+                const card = document.createElement('div');
+                card.className = `card ${cat} fade-in ${customUrl ? 'has-link' : ''}`;
+
+                let content = "";
+                if (customUrl) {
+                    content = `<a href="${customUrl}" target="_blank" class="image-link"><img src="${fileName}" alt="${cat}" loading="lazy"></a>`;
+                } else {
+                    content = `<img src="${fileName}" alt="${cat}" loading="lazy">`;
+                }
+
+                content += `<button class="zoom-btn" onclick="event.preventDefault(); event.stopPropagation(); openModal('${fileName}')">🔍</button>`;
+
+                card.innerHTML = content;
+                grid.appendChild(card);
+            }
+        });
+
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalImg').src = src;
+            modal.style.display = 'flex';
+        }
+
+        function filterObjects(c, event) {
+            const cards = document.querySelectorAll(".card");
+            const btns = document.querySelectorAll(".btn");
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            cards.forEach(card => {
+                card.style.display = (c === 'all' || card.classList.contains(c)) ? "block" : "none";
+            });
+        }
+
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerHTML = isDark ? '<span>🌙</span> DARK' : '<span>☀️</span> LIGHT';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heer Patel | Data Analyst & Creative Strategist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #0d0d12;
+            --card-bg: #16161e;
+            --lavender: #E6E6FA;
+            --accent: #9370DB;
+            --text-main: #ffffff;
+            --text-dim: #a0a0b0;
+            --glass: rgba(230, 230, 250, 0.05);
+            --border: rgba(230, 230, 250, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg: #f8f9fc;
+            --card-bg: #ffffff;
+            --lavender: #5D3FD3;
+            --accent: #7B68EE;
+            --text-main: #1a1a2e;
+            --text-dim: #555577;
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- GLOBAL SMOOTH TRANSITION --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Uniform timing for all elements to prevent color mismatch */
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.5s ease,
+                box-shadow 0.5s ease;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dim);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--lavender);
+        }
+
+        nav {
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--lavender);
+            background: transparent;
+            color: var(--lavender);
+            font-weight: 600;
+            margin-left: 1000px;
+        }
+
+        .hero {
+            padding: 140px 100px;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 100px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .hero .role {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            display: block;
+        }
+
+        .value-prop {
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 1.4rem;
+            border-left: 4px solid var(--accent);
+            padding: 10px 30px;
+            text-align: left;
+            color: var(--text-main);
+        }
+
+        .section-margin {
+            margin: 100px 0;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .bento-item {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 35px;
+            border: 1px solid var(--border);
+        }
+
+        .skills-wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 50px 0;
+        }
+
+        .skill-box {
+            background: var(--glass);
+            padding: 35px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-box i {
+            color: var(--accent);
+            font-size: 1.6rem;
+            margin-right: 15px;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            padding-left: 40px;
+            border-left: 3px solid var(--accent);
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .detailed-card {
+            background: var(--card-bg);
+            border-radius: 35px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detailed-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-body {
+            padding: 35px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tag-accent {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .info-block {
+            padding: 20px;
+            background: var(--glass);
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* --- FIXED BUTTON TRANSITION --- */
+        .btn-eye {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent);
+            color: white !important;
+            /* Force text color */
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: auto;
+            width: fit-content;
+            border: none;
+        }
+
+        .btn-eye i {
+            color: white !important;
+        }
+
+        .btn-eye:hover {
+            background: var(--lavender);
+            color: var(--bg) !important;
+            /* Switch text color with background */
+        }
+
+        .btn-eye:hover i {
+            color: var(--bg) !important;
+            /* Switch icon color with background */
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            background: var(--card-bg);
+            padding: 70px;
+            border-radius: 45px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            padding: 18px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: #fff;
+        }
+
+        @media (max-width: 900px) {
+
+            .bento-grid,
+            .contact-box,
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 DARK/LIGHT</button>
+        </nav>
+
+        <header class="hero">
+            <span class="role">DATA ANALYST | FRONT-END DEVELOPER | CREATIVE STRATEGIST</span>
+            <h1>HEER PATEL</h1>
+            <div class="value-prop">
+                <p>"BCA 2026 candidate at the intersection of Data Science and Creative Design. I build digital
+                    experiences backed by logic and visual storytelling."</p>
+            </div>
+        </header>
+
+        <div class="bento-grid section-margin">
+            <div class="bento-item">
+                <h2><i class="fa-solid fa-circle-user"></i> The Dual-Lens Perspective</h2>
+                <p style="margin-top: 20px;">I don’t fit into a single box. My journey began in Graphic & Social Media
+                    Design, mastering the art of visual storytelling. However, I soon realized that great design is most
+                    powerful when backed by logic and data. As a final-year BCA student, I bring a unique 'dual-lens'
+                    perspective to technical problems: I can write the code to analyze a complex dataset, but I also
+                    possess the UI/UX sensibility to present those findings intuitively.</p>
+            </div>
+            <div class="bento-item" style="background: var(--accent); color: white;">
+                <h2 style="color: white;"><i class="fa-solid fa-compass"></i> My Vision</h2>
+                <p style="margin-top: 20px;">"To bridge the gap between complex data and human-centric design. I aim to
+                    build tools and visualizations that don't just show numbers, but tell stories that drive impactful
+                    business results. I value the logic of the code just as much as the aesthetics of the design."</p>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <section class="section-margin">
+            <h2 style="text-align: center;"><i class="fa-solid fa-microchip"></i> Technical Arsenal</h2>
+            <div class="skills-wrap">
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-chart-pie"></i> Data & Analytics</h4>
+                    <p>Python (Basic), Power BI, MS Excel (Advanced), SQL (MySQL/Oracle)</p>
+                </div>
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-laptop-code"></i> Web Development</h4>
+                    <p>HTML5, CSS3, JavaScript (Basic), WordPress, PHP, WAMP</p>
+                </div>
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-palette"></i> Design & UI/UX</h4>
+                    <p>Figma, Canva, Visual Branding, Responsive Design, Content Strategy</p>
+                </div>
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-server"></i> Tools & Cloud</h4>
+                    <p>GitHub, VS Code, Streamlit Cloud, InfinityFree, Command Prompt</p>
+                </div>
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-brain"></i> Logic & Core</h4>
+                    <p>C, C++, SDLC, Database Management</p>
+                </div>
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-robot"></i> AI Technologies</h4>
+                    <p>ChatGPT, Gemini, Perplexity, Copilot (Prompt Engineering)</p>
+                </div>
+                <div class="skill-box">
+                    <h4><i class="fa-solid fa-robot"></i> Soft Skills</h4>
+                    <p>Analytical Thinking, Team Leadership, Project Coordination, Visual Storytelling</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-margin">
+            <h2><i class="fa-solid fa-graduation-cap"></i> Education Timeline</h2>
+            <br>
+            <br>
+            <div class="timeline-item">
+                <h4>BBA (Computer Applications) - BBA(CA)</h4>
+                <p>SSR College of Arts, Commerce & Science – SPPU | 2023 – Present | (Graduation: May 2026)</p>
+            </div>
+            <div class="timeline-item">
+                <h4>HSC – Science (PCM)</h4>
+                <p>St. Xavier’s School – CBSE Board | 2021 – 2023</p>
+            </div>
+            <div class="timeline-item">
+                <h4>SSC</h4>
+                <p>St. Xavier’s School – CBSE Board | Passed: 2021</p>
+            </div>
+        </section>
+        <br>
+
+        <section class="section-margin">
+            <h2><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
+            <div class="card-grid">
+                <div class="detailed-card" style="padding: 40px;">
+                    <span class="tag-accent">Burhani Socials | March 2025 – October 2025</span>
+                    <h3>Social Media Designer</h3>
+                    <p style="margin-top: 15px;">Designed high-impact visual content using Canva and Figma, establishing
+                        a consistent brand identity across Instagram and Facebook. Collaborated with strategy teams to
+                        align creatives with marketing goals, resulting in increased audience engagement. Translated
+                        complex client requirements into appealing graphic solutions.</p>
+                    <a href="https://drive.google.com/file/d/1pYn_qln1zfUc-0y5J1sFF6f636yiY_ST/view?usp=sharing"
+                        class="btn-eye" style="margin-top: 20px;"><i class="fa-solid fa-eye"></i> View
+                        Experience Letter</a>
+                </div>
+                <div class="detailed-card" style="padding: 40px;">
+                    <span class="tag-accent">NexusZen | May 2025 – June 2025</span>
+                    <h3>Sales Leads Manager</h3>
+                    <p style="margin-top: 15px;">Managed and tracked the lifecycle of sales leads, maintaining 100% data
+                        accuracy in records. Optimized the follow-up process through strategic communication, aiding in
+                        improved client acquisition rates. Utilized basic data tracking to analyze lead conversion
+                        patterns.Offered full-time Sales Lead Manager position following successful completion of
+                        internship.</p>
+                </div>
+            </div>
+        </section>
+        <br>
+        <section class="section-margin">
+            <h2><i class="fa-solid fa-certificate"></i> Verified Certificates</h2>
+            <div class="card-grid">
+                <div class="skill-box"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+                    <h4>Python for Data Science</h4>
+                    <a href="#" class="btn-eye"><i class="fa-solid fa-eye"></i> View</a>
+                </div>
+                <div class="skill-box"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 30px;">
+                    <h4>Front-End Development</h4>
+                    <a href="#" class="btn-eye"><i class="fa-solid fa-eye"></i> View</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-margin">
+            <h2 style="text-align: center; margin-bottom: 50px;"><i class="fa-solid fa-folder-tree"></i> Portfolio
+                Projects</h2>
+
+            <h4 style="margin: 40px 0 20px 0; color: var(--accent);">Data Analysis & Python Apps</h4>
+            <div class="card-grid">
+                <div class="detailed-card">
+                    <img src="spendsense.png" class="card-img">
+                    <div class="card-body">
+                        <span class="tag-accent">WEB APP</span>
+                        <h3>SpendSense- Snart Expense Tracker</h3>
+                        <div class="info-block">
+                            <p><b>The Build:</b> Python tool on Streamlit.</p>
+                            <p><b>The Impact:</b> Transforms raw data into visual spending insights.</p>
+                        </div>
+                        <a href="https://spendsenseonline.streamlit.app/" class="btn-eye"><i
+                                class="fa-solid fa-eye"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="detailed-card">
+                    <img src="netflix.png" class="card-img">
+                    <div class="card-body">
+                        <span class="tag-accent">WEB APP</span>
+                        <h3>Netflix Dashboard</h3>
+                        <div class="info-block">
+                            <p><b>The Build:</b> Analytical dashboard using Python.</p>
+                            <p><b>The Impact:</b> Visualizes streaming trends effectively.</p>
+                        </div>
+                        <a href="https://netflix-ecosystem-dashboard.streamlit.app/" class="btn-eye"><i
+                                class="fa-solid fa-eye"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="detailed-card">
+                    <img src="refineary.png" class="card-img">
+                    <div class="card-body">
+                        <span class="tag-accent">WEB APP</span>
+                        <h3>Refineary-Automated Data Filter</h3>
+                        <div class="info-block">
+                            <p><b>The Build:</b> Python productivity tool.</p>
+                            <p><b>The Impact:</b> Simplified data management without coding.</p>
+                        </div>
+                        <a href="https://refineary.streamlit.app/" class="btn-eye"><i class="fa-solid fa-eye"></i> Live
+                            Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="margin: 60px 0 20px 0; color: var(--accent);">Web Dev & E-Commerce</h4>
+            <div class="card-grid">
+                <div class="detailed-card">
+                    <img src="orbitum.png" class="card-img">
+                    <div class="card-body">
+                        <span class="tag-accent">WEBSITE</span>
+                        <h3>Orbitum: Space Store</h3>
+                        <p>Futuristic space-themed e-commerce store focusing on immersive design.</p>
+                        <a href="https://orbitum.infinityfree.me/?i=1" class="btn-eye"><i class="fa-solid fa-eye"></i>
+                            Live Demo</a>
+                    </div>
+                </div>
+                <div class="detailed-card">
+                    <img src="freshroots.png" class="card-img">
+                    <div class="card-body">
+                        <span class="tag-accent">WEBSITE</span>
+                        <h3>FreshRoots(Multipage)</h3>
+                        <p>Urban gardening platform blending educational content with a functional shop.</p>
+                        <a href="https://heer22patel.github.io/FreshRoots-Multi-Page/" class="btn-eye"><i
+                                class="fa-solid fa-eye"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="detailed-card">
+                    <img src="freshroots.png" class="card-img">
+                    <div class="card-body">
+                        <span class="tag-accent">WEBSITE</span>
+                        <h3>FreshRoots(Singlepage)</h3>
+                        <p>Urban gardening platform blending educational content with a functional shop.</p>
+                        <a href="https://heer22patel.github.io/FreshRoots-Single-Page/" class="btn-eye"><i
+                                class="fa-solid fa-eye"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-margin">
+            <h2><i class="fa-solid fa-camera-retro"></i> Social Media Content Design</h2>
+            <div class="card-grid">
+                <div class="detailed-card" style="padding: 40px; border: 2px dashed var(--accent);">
+                    <h3>Brand Identity Design Page</h3>
+                    <p style="margin: 15px 0;">Dedicated archive of Instagram and Facebook creatives, branding
+                        prototypes, and visual storytelling posts.</p>
+                    <a href="socialmedia.html" class="btn-eye"><i class="fa-solid fa-eye"></i> View Design Gallery</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-margin">
+            <div class="contact-box" id="contact">
+                <div class="contact-left">
+                    <h2>Connect With Me</h2>
+                    <div style="font-size: 2rem; display: flex; gap: 20px; margin-top: 30px;">
+                        <a href="#" style="color:var(--lavender)"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color:var(--lavender)"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" style="color:var(--lavender)"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" style="color:var(--lavender)"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" style="color:var(--lavender)"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <select required>
+                        <option value="" disabled selected>Purpose of Contact</option>
+                        <option>Hiring</option>
+                        <option>Collaboration</option>
+                        <option>Inquiry</option>
+                    </select>
+                    <textarea rows="4" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn-eye"
+                        style="width: 100%; justify-content: center; border-radius: 15px; cursor: pointer;">Send
+                        Message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 40px; opacity: 0.5;">
+            © 2026 HEER PATEL | Logic & Design Portfolio
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const root = document.documentElement;
+            const current = root.getAttribute('data-theme');
+            const target = current === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', target);
+        }
+    </script>
+</body>
+
+</html>
